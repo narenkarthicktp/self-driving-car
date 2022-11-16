@@ -58,7 +58,7 @@ def reset():
 		players = [ car( PLAYER_IMG, (240,600)) ]
 	survivor = players[0]
 	for i in range(49):
-		players.append( car( PLAYER_IMG, (240,600), network=players[0].ai.mutate(0.1)))
+		players.append( car( PLAYER_IMG, (240,600), network=players[0].ai.mutate(0.2)))
 	lane_onset = -(MARK_FILL+MARK_GAP)
 
 def mark_lanes( surface, color, start, end, length, gap):
