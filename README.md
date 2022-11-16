@@ -1,0 +1,1 @@
+A simple simulation of a self driving car in a highway traffic using feed forward neural networks. The neural network is refined using genetic algorithm.
