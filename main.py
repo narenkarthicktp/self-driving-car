@@ -67,9 +67,9 @@ def mark_lanes( surface, color, start, end, length, gap):
 	for mark in marks:
 		pygame.draw.line( surface, color, ( start[0], mark[0]), ( end[0], mark[1]))
 
+reset()
 user_info = text( (50,16), (250,650))
 info_time_window = 0
-reset()
 survivor = players[0]
 
 # SIMULATION LOOP
@@ -115,6 +115,7 @@ while state != 'END':
 			for place in new_row:
 				traffic.append( entity( choice(TRAFFIC_IMG), place))
 
+	# CONTROLS
 	# if manual:
 		# LEFT = keys[pygame.K_LEFT] or keys[pygame.K_KP4]
 		# UP = keys[pygame.K_UP] or keys[pygame.K_KP8]
@@ -132,7 +133,6 @@ while state != 'END':
 
 		if state == 'RUN':
 			state = 'PAUSED'
-
 		elif state == 'PAUSED':
 			state = 'RUN'
 
@@ -149,7 +149,9 @@ while state != 'END':
 			if player.rect.y == lead:
 					survivor = player
 
-	# MOVEMENT
+	# BG
+	SCREEN.fill((0,0,0))
+
 	if players:
 
 		lane_onset += int(numpy.cos(numpy.radians(survivor.angle))*survivor.speed)
@@ -158,9 +160,6 @@ while state != 'END':
 
 	for obstacle in traffic:
 		obstacle.move( 8-survivor.speed)
-
-	# BG
-	SCREEN.fill((0,0,0))
 
 	# SIDEBAR
 	save.display(SCREEN)

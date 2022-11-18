@@ -1,3 +1,5 @@
 __pycache__/
 .venv/
 *.pickle
+*.sublime-project
+*.sublime-workspace
