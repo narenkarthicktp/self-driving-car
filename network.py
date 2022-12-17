@@ -9,7 +9,7 @@ class layer():
 		self.noi = noi
 		self.noo = noo
 
-		self.weights = numpy.array([ [ random()*2-1 for j in range(noi) ] for i in range(noo) ])
+		self.weights = numpy.array([ [ -random() for j in range(noi) ] for i in range(noo) ])
 		self.biases =  numpy.array([ random()*2-1 for i in range(noo) ])
 		self.outputs = numpy.array([ 0 for i in range(noo) ])
 
@@ -54,13 +54,6 @@ class feed_forward():
 					child.layers[i].weights[j][k] = lerp( self.layers[i].weights[j][k], random()*2-1, amount)
 
 		return child
-
-	# def display(self):
-	# 	for layer in self.layers:
-	# 		print(layer.biases)
-	# 		print(layer.weights)
-	# 		print()
-	# 	print()
 
 def load(filename):
 	with open( filename, "rb") as infile:

@@ -43,7 +43,7 @@ class car(entity):
 		self.damaged = False
 
 		self.ai = network if network else feed_forward([5,6,3])
-		self.sensor = ray_caster(100)
+		self.sensor = ray_caster(160)
 		self.alerts = [ 0, 0, 0, 0, 0]
 
 		super().__init__( img, xy, size)

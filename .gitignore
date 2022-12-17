@@ -1,5 +1,5 @@
 __pycache__/
 .venv/
+autodriven.sublime-project
+autodriven.sublime-workspace
 *.pickle
-*.sublime-project
-*.sublime-workspace
