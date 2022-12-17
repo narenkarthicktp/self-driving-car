@@ -16,6 +16,6 @@ A simple simulation of a self driving car in a highway traffic using feed forwar
  - Save the model and reload
  - Repeat the above steps until you get an optimal model that learns to reach a specific distance without crashing
 
-Tip : Inorder to train the network faster, try increasing the <a href="https://github.com/NKTP-718/self-driving-car/blob/e2327413cae4a7037d64bfbe9cbf737fc6aebc31/main.py#L53">mutation rate</a> and <a href="https://github.com/NKTP-718/self-driving-car/blob/e2327413cae4a7037d64bfbe9cbf737fc6aebc31/main.py#L54">no. of car instances</a>, vroom! :car:
+Tip : Inorder to train the network faster, try increasing the <a href="https://github.com/NKTP-718/self-driving-car/blob/master/main.py#L53">mutation rate</a> and <a href="https://github.com/NKTP-718/self-driving-car/blob/master/main.py#L54">no. of car instances</a>, vroom! :car:
 
 ---
