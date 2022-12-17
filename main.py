@@ -31,7 +31,7 @@ save = button( (32,32), (40,200), './assets/sidebar/save.png', 'SAVE')
 pause = toggle( (32,32), (40,280), './assets/sidebar/pause.png', './assets/sidebar/play.png', 'PAUSE', 'PLAY')
 
 # TRAFFIC_XY = [ (350,-100), (240,-100), (130,-100), (180,-100), (290,-100) ]
-TRAFFIC_XY = [ (350,-100), (240,-100), (130,-100) ]
+TRAFFIC_XY = [ [(350,-100), (235,-100), (130,-100)], [(190,-100), (290,-100)] ]
 
 TRAFFIC_IMG = [ './assets/vehicles/orange.png', './assets/vehicles/red.png', './assets/vehicles/truck.png',
 				'./assets/vehicles/orange.png', './assets/vehicles/red.png', './assets/vehicles/cyan.png',
@@ -42,7 +42,7 @@ TRAFFIC_IMG = list(map( pygame.image.load, TRAFFIC_IMG))
 crowd_control = 1
 
 TRAFFIC_EVENT = pygame.USEREVENT
-pygame.time.set_timer( TRAFFIC_EVENT, 2000)
+pygame.time.set_timer( TRAFFIC_EVENT, 1500)
 
 # MUTATION_EVENT = pygame.USEREVENT
 # pygame.time.set_timer( MUTATION_EVENT, 2000)
@@ -50,15 +50,18 @@ pygame.time.set_timer( TRAFFIC_EVENT, 2000)
 def reset():
 	global traffic, lane_onset, players, survivor
 
+	MUTATION_RATE = 0.12
+	NOC = 50
+
 	# manual = False
 	traffic = [ ]
 	try:
-		players = [ car( PLAYER_IMG, (240,600), network=load('./exp.pickle')) ]
+		players = [ car( PLAYER_IMG, (235,600), network=load('./exp.pickle')) ]
+		for i in range(NOC-1):
+			players.append( car( PLAYER_IMG, (235,600), network=players[0].ai.mutate(MUTATION_RATE)))
 	except(FileNotFoundError):
-		players = [ car( PLAYER_IMG, (240,600)) ]
+		players = [ car( PLAYER_IMG, (235,600)) for i in range(NOC-1) ]
 	survivor = players[0]
-	for i in range(49):
-		players.append( car( PLAYER_IMG, (240,600), network=players[0].ai.mutate(0.2)))
 	lane_onset = -(MARK_FILL+MARK_GAP)
 
 def mark_lanes( surface, color, start, end, length, gap):
@@ -109,11 +112,14 @@ while state != 'END':
 				if obstacle.rect.y > 800 or obstacle.rect.y < -40:
 					traffic.remove(obstacle)
 
-			new_row = TRAFFIC_XY.copy()
-			for i in range(crowd_control):
-				new_row.remove(choice(new_row))
+			# new_row = TRAFFIC_XY.copy()
+			# for i in range(crowd_control):
+				# new_row.remove(choice(new_row))
+			new_row = choice(TRAFFIC_XY)
+			mark = choice(new_row)
 			for place in new_row:
-				traffic.append( entity( choice(TRAFFIC_IMG), place))
+				if place != mark:
+					traffic.append( entity( choice(TRAFFIC_IMG), place))
 
 	# CONTROLS
 	# if manual:
@@ -125,12 +131,12 @@ while state != 'END':
 		reset()
 
 	if save.listen(clicked):
-		# survivor.ai.serialize('./test.pickle')
 		survivor.ai.serialize('./exp.pickle')
 		info_time_window = 20
 
 	if keys[pygame.K_SPACE] or pause.listen(clicked):
 
+		pygame.time.delay(30)
 		if state == 'RUN':
 			state = 'PAUSED'
 		elif state == 'PAUSED':
