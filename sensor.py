@@ -3,7 +3,6 @@ import numpy
 
 distance = lambda p1,p2 : numpy.linalg.norm(numpy.array(p1) - numpy.array(p2))
 SAFE = ( 0, 204, 153, 10)
-# SAFE = ( 153, 255, 153)
 DANGER = ( 204, 0, 102, 10)
 
 class ray_caster():
@@ -13,7 +12,7 @@ class ray_caster():
 		self.nor = 5
 		self.coverage = coverage
 		self.alerts = [ .0, .0, .0, .0, .0]
-		self.angles = [ -30, -60, -90, -120, -150]
+		self.angles = [ -60, -80, -90, -100, -120]
 		self.reach = [ (.0,.0) for i in range(self.nor)]
 
 	def detect( self, position, angle, obstacles):
