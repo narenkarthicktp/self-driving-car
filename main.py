@@ -57,10 +57,10 @@ def reset():
 	traffic = [ ]
 	try:
 		players = [ car( PLAYER_IMG, (235,600), network=load('./exp.pickle')) ]
-		for i in range(NOC-1):
+		for _ in range(NOC-1):
 			players.append( car( PLAYER_IMG, (235,600), network=players[0].ai.mutate(MUTATION_RATE)))
 	except(FileNotFoundError):
-		players = [ car( PLAYER_IMG, (235,600)) for i in range(NOC-1) ]
+		players = [ car( PLAYER_IMG, (235,600)) for _ in range(NOC-1) ]
 	survivor = players[0]
 	lane_onset = -(MARK_FILL+MARK_GAP)
 

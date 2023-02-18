@@ -9,9 +9,9 @@ class layer():
 		self.noi = noi
 		self.noo = noo
 
-		self.weights = numpy.array([ [ -random() for j in range(noi) ] for i in range(noo) ])
-		self.biases =  numpy.array([ random()*2-1 for i in range(noo) ])
-		self.outputs = numpy.array([ 0 for i in range(noo) ])
+		self.weights = numpy.array([ [ -random() for i in range(noi) ] for _ in range(noo) ])
+		self.biases =  numpy.array([ random()*2-1 for _ in range(noo) ])
+		self.outputs = numpy.array([ 0 for _ in range(noo) ])
 
 	def forward( self, inputs):
 
