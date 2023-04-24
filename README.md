@@ -6,7 +6,7 @@ A simple simulation of a self driving car in a highway traffic using feed forwar
 
 ## Preview :
 
-<img src=".\preview.png" margin="20px"></img>
+<img src=".\preview.gif" margin="20px" width="400px"></img>
 
 ---
 
