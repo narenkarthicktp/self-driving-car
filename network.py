@@ -30,8 +30,8 @@ class feed_forward():
 
 	def forward( self, inputs):
 
-		buffer = self.layers[0].forward(inputs)
-		for i in range(1,len(self.layers)):
+		buffer = inputs
+		for i in range(0,len(self.layers)):
 			buffer = self.layers[i].forward(buffer)
 		return buffer
 

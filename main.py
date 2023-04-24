@@ -48,11 +48,12 @@ pygame.time.set_timer( TRAFFIC_EVENT, 1500)
 # pygame.time.set_timer( MUTATION_EVENT, 2000)
 
 def reset():
-	global traffic, lane_onset, players, survivor
+	global traffic, lane_onset, players, survivor, state
 
 	MUTATION_RATE = 0.12
 	NOC = 50
 
+	state = 'RUN'
 	# manual = False
 	traffic = [ ]
 	try:
@@ -136,13 +137,16 @@ while state != 'END':
 
 	if keys[pygame.K_SPACE] or pause.listen(clicked):
 
-		pygame.time.delay(30)
+		pygame.time.delay(60)
 		if state == 'RUN':
 			state = 'PAUSED'
 		elif state == 'PAUSED':
 			state = 'RUN'
 
 	elif state == 'PAUSED':
+		if info_time_window:
+			user_info.display( SCREEN, 'MODEL SAVED')
+			info_time_window -= 1
 		continue
 
 	if not len(players):
